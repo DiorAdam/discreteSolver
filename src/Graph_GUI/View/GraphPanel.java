@@ -3,13 +3,13 @@ package Graph_GUI.View;
 import Graph_GUI.Model.*;
 
 import java.awt.*;
-import javax.swing.JPanel;
+import basicGUI.basicPanel;
 import java.util.Vector;
 import java.util.Arrays;
 
 
 
-public class GraphPanel extends JPanel{
+public class GraphPanel extends basicPanel{
     drawAdm da;
     int rad;
     public boolean ev;

@@ -1,6 +1,7 @@
 package Graph_GUI.View;
 
 import Graph_GUI.Control.menuListener;
+import basicGUI.*;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -18,12 +19,12 @@ public class menuPanel extends JPanel {
 
     public menuPanel(GraphPanel gp_){
         this.gp = gp_;
-        erase = new JButton("Erase");
-        edge = new JButton("drawEdge");
-        vertex = new JButton("drawVertex");
-        getGraph = new JButton("Print Graph Adjacency");
-        filler1 = new JLabel();
-        filler2 = new JLabel();
+        erase = new basicButton("Erase");
+        edge = new basicButton("drawEdge");
+        vertex = new basicButton("drawVertex");
+        getGraph = new basicButton("Print Graph Adjacency");
+        filler1 = new basicLabel("");
+        filler2 = new basicLabel("");
 
         menuListener mL = new menuListener(this.gp);
 
