@@ -1,6 +1,6 @@
 package Graph_GUI.Model;
+import java.awt.*;
 import java.util.Vector;
-import java.awt.Graphics;
 
 public class drawAdm {
     public Vector<Edge> edges;
@@ -12,8 +12,11 @@ public class drawAdm {
     }
 
     public void drawAll(Graphics g){
+        int c = 0;
         for (Vertex v : vertices){
             v.draw(g);
+            g.drawString("V" + c, v.xLeft+6, v.yTop+18);
+            c++;
         }
         for (Edge e : edges){
             e.draw(g);

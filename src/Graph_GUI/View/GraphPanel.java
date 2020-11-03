@@ -17,12 +17,13 @@ public class GraphPanel extends basicPanel{
     public GraphPanel(){
         this.setPreferredSize(new Dimension(500, 300));
         this.da = new drawAdm();
-        this.rad = 12;
+        this.rad = 30;
         this.ev = true;
     }
 
     @Override
     public void paintComponent(Graphics g){
+        g.setFont(new Font("", Font.BOLD,12));
         super.paintComponent(g);
         da.drawAll(g);
     }
@@ -63,7 +64,7 @@ public class GraphPanel extends basicPanel{
             Vector<Integer> l_ = new Vector<Integer>(Arrays.asList(l));
             v_.add(l_);
         }
-        Vector<Vector<Integer>> e_ = new Vector<Vector<Integer>>();
+        Vector<Vector<Integer>> e_ = new Vector<>();
         for (Edge e : da.edges ){
             Integer[] l = {e.xe, e.ye, e.xs, e.ys};
             Vector<Integer> l_ = new Vector<Integer>(Arrays.asList(l));
