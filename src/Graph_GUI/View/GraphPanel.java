@@ -17,7 +17,7 @@ public class GraphPanel extends basicPanel{
     public GraphPanel(){
         this.setPreferredSize(new Dimension(500, 300));
         this.da = new drawAdm();
-        this.rad = 30;
+        this.rad = 15;
         this.ev = true;
     }
 
@@ -33,21 +33,42 @@ public class GraphPanel extends basicPanel{
         this.repaint();
     }
 
+    public int[] cleanOval(int xs, int ys, int xe, int ye){
+        int[] ans = new int[4];
+        int p = 1;
+        try{
+            p = Math.abs((ye-ys)/(xe-xs));
+        }
+        catch(Exception e){
+            System.err.println("An edge must be between 2 different vertices");
+        }
+
+        int r;
+        r = (int) (rad/(Math.sqrt(1+p*p)));
+        ans[0] = (xs<xe)? xs + r : xs-r;
+        ans[1] = (ys<ye)? ys + p*r : ys - p*r;
+        ans[2] = (xe < xs)? xe + r : xe - r;
+        ans[3] = (ye < ys)? ye + p*r : ye -p*r;
+
+        return ans;
+    }
+
     public void addEdge(int xs, int ys, int xe, int ye){
         boolean i = false , j = false;
         for (Vertex v : da.vertices){
-            if ( Math.pow((v.xLeft+v.radius/2-xs), 2) + Math.pow( v.yTop +v.radius/2-ys, 2) < Math.pow(v.radius/2, 2)){
-                xs = v.xLeft+v.radius/2; ys = v.yTop+v.radius/2;
+            if ( Math.pow((v.xLeft+v.radius-xs), 2) + Math.pow( v.yTop +v.radius-ys, 2) < Math.pow(v.radius, 2)){
+                xs = v.xLeft+v.radius; ys = v.yTop+v.radius;
                 i = true;
             }
-            if ( Math.pow((v.xLeft+v.radius/2-xe), 2) + Math.pow( v.yTop +v.radius/2-ye, 2) < Math.pow(v.radius/2, 2)){
-                xe = v.xLeft + v.radius/2; ye = v.yTop + v.radius/2;
+            if ( Math.pow((v.xLeft+v.radius-xe), 2) + Math.pow( v.yTop +v.radius-ye, 2) < Math.pow(v.radius, 2)){
+                xe = v.xLeft + v.radius; ye = v.yTop + v.radius;
                 j = true;
             }
             if (i && j) break;
         }
         if (i && j){
-            da.edges.add(new Edge(xs, ys, xe, ye));
+            int[] p = cleanOval(xs, ys, xe, ye);
+            da.edges.add(new Edge(p[0], p[1], p[2], p[3]));
             repaint();
         }
     }

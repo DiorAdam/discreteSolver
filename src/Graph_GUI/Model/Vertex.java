@@ -8,6 +8,6 @@ public class Vertex {
     }
 
     public void draw(Graphics g){
-        g.drawOval(this.xLeft, this.yTop, this.radius, this.radius);
+        g.drawOval(this.xLeft, this.yTop, 2*this.radius, 2*this.radius);
     }
 }
